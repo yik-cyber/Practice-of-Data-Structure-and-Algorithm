@@ -65,10 +65,12 @@ int match_num(char* s){
     int p = 1;
     int len = strlen(s);
     for(int i = 0; i < len; i++){
-        while(t[p].child[s[i] - 'A'] == 0 && p != 1) p = t[p].pnext;
-        
+        while(t[p].child[s[i] - 'A'] == 0) p = t[p].pnext;
+        //find the matched alphbet, p not equal to the 0
+
         if(t[p].child[s[i] - 'A'])
-            p = t[p].child[s[i] - 'A'];
+            p = t[p].child[s[i] - 'A']; //matched
+        if(p == 1) continue; //p一定要和某个字符匹配
         
         int tmp = p;
         while (tmp && t[tmp].count != -1) { // the matched substring 

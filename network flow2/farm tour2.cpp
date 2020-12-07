@@ -18,7 +18,7 @@ void add_edge(int u, int v, int f, int w){
     edge[cnt].next = head[u];
     head[u] = cnt;
     
-    cnt++;
+    cnt++; //在残图中会有反向边的流量，因此要设置反向边的费用为-w，注意这一点
     edge[cnt].from = v;
     edge[cnt].to = u;
     edge[cnt].flow = 0;
@@ -51,7 +51,7 @@ bool spfa(){
                 dis[v] = dis[u] + edge[i].cost;
                 last[v] = i;
                 flow[v] = min(flow[u], edge[i].flow);
-                if(!vis[v]){
+                if(!vis[v]){ //如果在队列中就不用再加入队列了
                     vis[v] = true;
                     q.push(v);
                 }
